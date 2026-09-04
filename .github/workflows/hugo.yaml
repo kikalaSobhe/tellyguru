@@ -39,7 +39,7 @@ jobs:
           echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
 
       - name: Build
-        run: hugo build --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/" --cacheDir "${{ runner.temp }}/.cache/hugo"
+        run: hugo build --gc --minify --cacheDir "${{ runner.temp }}/.cache/hugo"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
