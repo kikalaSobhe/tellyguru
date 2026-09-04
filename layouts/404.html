@@ -1,0 +1,20 @@
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Wrong mountain | Telly.guru</title>
+  <link rel="preload" href="{{ "fonts/Manrope-Variable.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+</head>
+<body>
+  <main class="not-found">
+    <p class="eyebrow">404</p>
+    <h1>Wrong mountain.</h1>
+    <p>There is no wisdom at this address.</p>
+    <a class="button" href="{{ .Site.Home.RelPermalink }}">Return to Telly</a>
+  </main>
+</body>
+</html>

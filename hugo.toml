@@ -1,0 +1,17 @@
+baseURL = "https://telly.guru/"
+locale = "en-US"
+title = "Telly.guru"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  description = "Telly. Colleague-appointed guru, professionally committed to the bit."
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
