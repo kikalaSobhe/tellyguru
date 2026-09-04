@@ -1,30 +1,58 @@
 const form = document.querySelector("#oracle-form");
 const question = document.querySelector("#question");
 const answer = document.querySelector("#answer");
+const answerText = answer?.querySelector("p");
 const error = document.querySelector("#question-error");
+const bell = document.querySelector("#bell-stage");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-const guidance = [
-  "That sounds like a meeting that should have been an email.",
-  "Make a smaller version first. The answer will become annoyingly obvious.",
-  "Name the real problem. It is probably hiding behind the urgent one.",
-  "Have lunch, then make one honest decision.",
-  "Yes, but only if you can explain why in one sentence.",
-  "I need more context. Suspiciously, this makes me sound professional.",
-  "The complicated option has excellent marketing. Choose the clear one."
+const verdicts = [
+  "Cut the scope. Keep the standard.",
+  "Name the decision. The rest is scenery.",
+  "If nobody owns it, it is not a plan.",
+  "Write the one-sentence version. Start there.",
+  "Choose the answer you can still maintain next year.",
+  "You already know. You are asking for permission.",
+  "Ship the clear version. Improve the clever version later."
 ];
 
-function guidanceFor(value) {
+let typingTimer;
+
+function verdictFor(value) {
   const score = [...value.trim().toLowerCase()].reduce((total, character) => total + character.charCodeAt(0), 0);
-  return guidance[score % guidance.length];
+  return verdicts[score % verdicts.length];
 }
 
-if (form && question && answer && error) {
+function typeVerdict(text) {
+  window.clearTimeout(typingTimer);
+
+  if (!answerText || reducedMotion.matches) {
+    if (answerText) answerText.textContent = text;
+    return;
+  }
+
+  answerText.textContent = "";
+  let index = 0;
+
+  function typeNext() {
+    answerText.textContent += text[index];
+    index += 1;
+
+    if (index < text.length) {
+      typingTimer = window.setTimeout(typeNext, 22);
+    }
+  }
+
+  typeNext();
+}
+
+if (form && question && answer && answerText && error) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const value = question.value.trim();
 
     if (!value) {
-      error.textContent = "The guru cannot answer a question you have not asked.";
+      error.textContent = "State the question first.";
       question.setAttribute("aria-invalid", "true");
       question.focus();
       return;
@@ -34,19 +62,25 @@ if (form && question && answer && error) {
     question.removeAttribute("aria-invalid");
     answer.classList.add("is-thinking");
     answer.setAttribute("aria-busy", "true");
-    answer.querySelector("p").textContent = "Consulting the entirely unofficial archives...";
+    answerText.textContent = "The chair is considering...";
+
+    if (bell) {
+      bell.classList.remove("is-ringing");
+      void bell.offsetWidth;
+      bell.classList.add("is-ringing");
+    }
 
     window.setTimeout(() => {
-      answer.querySelector("p").textContent = guidanceFor(value);
       answer.classList.remove("is-thinking");
       answer.removeAttribute("aria-busy");
-    }, 480);
+      typeVerdict(verdictFor(value));
+    }, reducedMotion.matches ? 0 : 420);
   });
 }
 
 const reveals = document.querySelectorAll(".reveal");
 
-if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if ("IntersectionObserver" in window && !reducedMotion.matches) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

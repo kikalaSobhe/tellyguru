@@ -1,11 +1,11 @@
 {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
 {{- $js := resources.Get "js/main.js" | minify | fingerprint -}}
 {{- $chair := resources.Get "images/guru-chair.png" -}}
-{{- $chairSmall := $chair.Resize "560x webp q78" -}}
-{{- $chairLarge := $chair.Resize "960x webp q84" -}}
+{{- $chairSmall := $chair.Resize "640x webp q80" -}}
+{{- $chairLarge := $chair.Resize "1120x webp q86" -}}
 {{- $bell := resources.Get "images/guru-bell.png" -}}
-{{- $bellSmall := $bell.Resize "760x webp q78" -}}
-{{- $bellLarge := $bell.Resize "1400x webp q84" -}}
+{{- $bellSmall := $bell.Resize "800x webp q80" -}}
+{{- $bellLarge := $bell.Resize "1440x webp q86" -}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,17 +13,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }} | Telly.guru</title>
   <meta name="description" content="{{ .Description }}">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef0f3">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12151b">
+  <meta name="theme-color" content="#090b0f">
   <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="preload" href="{{ "fonts/Manrope-Variable.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" as="image" href="{{ $chairLarge.RelPermalink }}" imagesrcset="{{ $chairSmall.RelPermalink }} 560w, {{ $chairLarge.RelPermalink }} 960w" imagesizes="(max-width: 760px) 48vw, 40vw" fetchpriority="high">
+  <link rel="preload" as="image" href="{{ $chairLarge.RelPermalink }}" imagesrcset="{{ $chairSmall.RelPermalink }} 640w, {{ $chairLarge.RelPermalink }} 1120w" imagesizes="(max-width: 760px) 76vw, 58vw" fetchpriority="high">
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Apparently, I’m the guru.">
-  <meta property="og:description" content="My colleagues started the joke. I bought the domain. Now we all have to live with it.">
+  <meta property="og:title" content="Telly. The Guru.">
+  <meta property="og:description" content="Bring the hard question. Leave with a sharper one.">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ $bellLarge.Permalink }}">
+  <meta property="og:image" content="{{ $chairLarge.Permalink }}">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Telly","url":"https://telly.guru/"}
@@ -33,67 +33,112 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <a class="wordmark" href="{{ .Site.Home.RelPermalink }}" aria-label="Telly.guru home">TELLY<span>.GURU</span></a>
-    <a class="nav-cta" href="#ask">Ask the guru</a>
+    <a class="wordmark" href="{{ .Site.Home.RelPermalink }}" aria-label="Telly.guru home">
+      <span class="wordmark-symbol" aria-hidden="true">T.</span>
+      <span>TELLY.GURU</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="#doctrine">Doctrine</a>
+      <a href="#oracle">Oracle</a>
+      <a class="nav-cta" href="#oracle">Consult Telly</a>
+    </nav>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow intro intro-one">A highly unofficial title</p>
-        <h1 id="hero-title" class="intro intro-two">Apparently,<br>I’m the <em>guru.</em></h1>
-        <p class="hero-deck intro intro-three">My colleagues started the joke. I bought the domain. Now we all have to live with it.</p>
-        <div class="hero-actions intro intro-four">
-          <a class="button" href="#ask">Ask the guru</a>
+      <figure class="hero-media intro intro-media">
+        <picture>
+          <source srcset="{{ $chairSmall.RelPermalink }} 640w, {{ $chairLarge.RelPermalink }} 1120w" type="image/webp" sizes="(max-width: 760px) 76vw, 58vw">
+          <img src="{{ $chairLarge.RelPermalink }}" width="1120" height="1400" alt="The guru's empty office chair, draped in cobalt blue with a bell on the seat" fetchpriority="high">
+        </picture>
+      </figure>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow intro intro-one">The office oracle</p>
+          <h1 id="hero-title" class="intro intro-two">
+            <span>Telly<span class="accent">.</span></span>
+            <span>The Guru<span class="accent">.</span></span>
+          </h1>
+          <p class="hero-deck intro intro-three">Bring the hard question. Leave with a sharper one.</p>
+          <a class="button intro intro-four" href="#oracle">Consult Telly</a>
         </div>
-      </div>
 
-      <figure class="hero-media intro intro-three">
-        <picture>
-          <source srcset="{{ $chairSmall.RelPermalink }} 560w, {{ $chairLarge.RelPermalink }} 960w" type="image/webp" sizes="(max-width: 760px) 48vw, 40vw">
-          <img src="{{ $chairLarge.RelPermalink }}" width="960" height="1200" alt="An empty office chair with blue fabric and a small service bell" fetchpriority="high">
-        </picture>
-      </figure>
+        <aside class="hero-note intro intro-four" aria-label="Origin of the title">
+          <span>Title</span>
+          <p>Given by colleagues.<br>Confirmed by domain.</p>
+        </aside>
+      </div>
     </section>
 
-    <section class="origin reveal" aria-labelledby="origin-title">
-      <div class="origin-copy">
-        <h2 id="origin-title">The title came first.<br>Expertise pending.</h2>
-        <p>It began as an office joke. Buying the domain felt like the only responsible response.</p>
+    <section class="doctrine reveal" id="doctrine" aria-labelledby="doctrine-title">
+      <header class="section-heading">
+        <p>Guru protocol</p>
+        <h2 id="doctrine-title">Clarity is the whole job.</h2>
+      </header>
+
+      <div class="principles">
+        <article class="principle">
+          <h3>See the actual problem.</h3>
+          <p>Noise likes meetings. Clarity likes one clean sentence.</p>
+        </article>
+        <article class="principle">
+          <h3>Make the call.</h3>
+          <p>A useful answer eventually becomes a decision.</p>
+        </article>
+        <article class="principle">
+          <h3>Explain it plainly.</h3>
+          <p>If the idea needs fog, it is not ready.</p>
+        </article>
       </div>
-      <figure class="bell-media">
-        <picture>
-          <source srcset="{{ $bellSmall.RelPermalink }} 760w, {{ $bellLarge.RelPermalink }} 1400w" type="image/webp" sizes="(max-width: 760px) 100vw, 54vw">
-          <img src="{{ $bellLarge.RelPermalink }}" width="1400" height="933" alt="A chrome desk bell and a blank sticky note on a blue pedestal" loading="lazy" decoding="async">
-        </picture>
-      </figure>
     </section>
 
-    <section class="ask reveal" id="ask" aria-labelledby="ask-title">
-      <div class="ask-heading">
-        <h2 id="ask-title">Bring me your question.</h2>
-        <p>Answers are confident. Accuracy is more of a team effort.</p>
+    <section class="claim reveal" aria-labelledby="claim-title">
+      <figure class="bell-media" id="bell-stage">
+        <picture>
+          <source srcset="{{ $bellSmall.RelPermalink }} 800w, {{ $bellLarge.RelPermalink }} 1440w" type="image/webp" sizes="100vw">
+          <img src="{{ $bellLarge.RelPermalink }}" width="1440" height="960" alt="A chrome service bell on a cobalt pedestal" loading="lazy" decoding="async">
+        </picture>
+      </figure>
+      <div class="claim-copy">
+        <p>The title started as a joke.</p>
+        <h2 id="claim-title">Buying the domain made it policy.</h2>
+      </div>
+    </section>
+
+    <section class="oracle-section reveal" id="oracle" aria-labelledby="oracle-title">
+      <div class="oracle-heading">
+        <p>One question at a time</p>
+        <h2 id="oracle-title">Put it to the chair.</h2>
       </div>
 
       <form class="oracle" id="oracle-form" novalidate>
         <div class="field">
-          <label for="question">Your question</label>
-          <textarea id="question" name="question" rows="3" placeholder="Should this have been a meeting?" aria-describedby="question-help question-error"></textarea>
-          <p class="helper" id="question-help">Keep it short. The guru has meetings.</p>
-          <p class="error" id="question-error" role="alert"></p>
+          <label for="question">State the real question</label>
+          <div class="question-row">
+            <textarea id="question" name="question" rows="2" placeholder="What decision am I avoiding?" aria-describedby="question-help question-error"></textarea>
+            <button class="button" type="submit">Ask the guru</button>
+          </div>
+          <div class="field-meta">
+            <p class="helper" id="question-help">Specific questions get sharper answers.</p>
+            <p class="error" id="question-error" role="alert"></p>
+          </div>
         </div>
-        <button class="button" type="submit">Ask the guru</button>
-        <div class="answer" id="answer" aria-live="polite" aria-atomic="true">
-          <span class="answer-label">Official guidance</span>
-          <p>Wisdom is currently accepting questions.</p>
+
+        <div class="verdict" id="answer" aria-live="polite" aria-atomic="true">
+          <span>Verdict</span>
+          <p>The chair has opinions. State the problem.</p>
         </div>
       </form>
     </section>
   </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="{{ .Site.Home.RelPermalink }}">TELLY<span>.GURU</span></a>
-    <p>Colleague-appointed. Internet-confirmed.</p>
+    <a class="wordmark" href="{{ .Site.Home.RelPermalink }}">
+      <span class="wordmark-symbol" aria-hidden="true">T.</span>
+      <span>TELLY.GURU</span>
+    </a>
+    <p>Answers with a spine.</p>
     <p>© {{ now.Year }} Telly</p>
   </footer>
 

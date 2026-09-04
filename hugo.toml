@@ -5,7 +5,7 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term", "RSS"]
 
 [params]
-  description = "Telly. Colleague-appointed guru, professionally committed to the bit."
+  description = "Telly. The office oracle. Bring the hard question and leave with a sharper one."
 
 [caches]
   [caches.images]
