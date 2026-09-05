@@ -2,16 +2,16 @@ version: 1
 backend: omp
 baseBranch: main
 capabilities:
-  investigation: opencode-go/muse-spark-1.3-contributor
-  planning: opencode-go/muse-spark-1.3-contributor
-  test-planning: opencode-go/muse-spark-1.3-contributor
-  implementation: opencode-go/muse-spark-1.3-contributor
-  review: opencode-go/muse-spark-1.3-contributor
-  security-review: opencode-go/muse-spark-1.3-contributor
-  data-review: opencode-go/muse-spark-1.3-contributor
-  api-review: opencode-go/muse-spark-1.3-contributor
-  ui-review: opencode-go/muse-spark-1.3-contributor
-  performance-review: opencode-go/muse-spark-1.3-contributor
+  investigation: opencode-go/deepseek-v4-flash
+  planning: opencode-go/deepseek-v4-flash
+  test-planning: opencode-go/deepseek-v4-flash
+  implementation: opencode-go/deepseek-v4-flash
+  review: opencode-go/deepseek-v4-flash
+  security-review: opencode-go/deepseek-v4-flash
+  data-review: opencode-go/deepseek-v4-flash
+  api-review: opencode-go/deepseek-v4-flash
+  ui-review: opencode-go/deepseek-v4-flash
+  performance-review: opencode-go/deepseek-v4-flash
 roles:
   investigator: investigation
   planner: planning
