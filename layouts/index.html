@@ -1,8 +1,8 @@
 {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
 {{- $js := resources.Get "js/main.js" | minify | fingerprint -}}
-{{- $chair := resources.Get "images/guru-chair.png" -}}
-{{- $chairSmall := $chair.Resize "640x webp q80" -}}
-{{- $chairLarge := $chair.Resize "1120x webp q86" -}}
+{{- $scene := resources.Get "images/guru-teaching.png" -}}
+{{- $sceneSmall := $scene.Resize "900x webp q80" -}}
+{{- $sceneLarge := $scene.Resize "1920x webp q84" -}}
 {{- $bell := resources.Get "images/guru-bell.png" -}}
 {{- $bellSmall := $bell.Resize "800x webp q80" -}}
 {{- $bellLarge := $bell.Resize "1440x webp q86" -}}
@@ -13,17 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }} | Telly.guru</title>
   <meta name="description" content="{{ .Description }}">
-  <meta name="theme-color" content="#090b0f">
+  <meta name="theme-color" content="#fbf6ea">
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="preload" href="{{ "fonts/Manrope-Variable.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" as="image" href="{{ $chairLarge.RelPermalink }}" imagesrcset="{{ $chairSmall.RelPermalink }} 640w, {{ $chairLarge.RelPermalink }} 1120w" imagesizes="(max-width: 760px) 76vw, 58vw" fetchpriority="high">
+  <link rel="preload" href="{{ "fonts/PlayfairDisplay-Variable.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="{{ $sceneLarge.RelPermalink }}" imagesrcset="{{ $sceneSmall.RelPermalink }} 900w, {{ $sceneLarge.RelPermalink }} 1920w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Telly. The Guru.">
-  <meta property="og:description" content="Bring the hard question. Leave with a sharper one.">
+  <meta property="og:description" content="The journey of a thousand miles begins with a single step. It ends with a meeting to plan it.">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ $chairLarge.Permalink }}">
+  <meta property="og:image" content="{{ $sceneLarge.Permalink }}">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Telly","url":"https://telly.guru/"}
@@ -48,26 +49,22 @@
     <section class="hero" aria-labelledby="hero-title">
       <figure class="hero-media intro intro-media">
         <picture>
-          <source srcset="{{ $chairSmall.RelPermalink }} 640w, {{ $chairLarge.RelPermalink }} 1120w" type="image/webp" sizes="(max-width: 760px) 76vw, 58vw">
-          <img src="{{ $chairLarge.RelPermalink }}" width="1120" height="1400" alt="The guru's empty office chair, draped in cobalt blue with a bell on the seat" fetchpriority="high">
+          <source srcset="{{ $sceneSmall.RelPermalink }} 900w, {{ $sceneLarge.RelPermalink }} 1920w" type="image/webp" sizes="100vw">
+          <img src="{{ $sceneLarge.RelPermalink }}" width="1920" height="1416" alt="A warm illustration of a wise, amused West African elder in a cobalt cap and robe teaching four children beneath a great tree on the savanna" fetchpriority="high">
         </picture>
       </figure>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow intro intro-one">The office oracle</p>
-          <h1 id="hero-title" class="intro intro-two">
-            <span>Telly<span class="accent">.</span></span>
-            <span>The Guru<span class="accent">.</span></span>
+          <p class="eyebrow intro intro-one">The old man under the tree</p>
+          <h1 id="hero-title" class="proverb intro intro-two">
+            <span class="proverb-line">The journey of a&nbsp;thousand&nbsp;miles</span>
+            <span class="proverb-line">begins with a&nbsp;single&nbsp;step.</span>
+            <span class="proverb-line">It ends with a&nbsp;meeting to&nbsp;plan&nbsp;it.</span>
           </h1>
-          <p class="hero-deck intro intro-three">Bring the hard question. Leave with a sharper one.</p>
+          <p class="proverb-src intro intro-three">Ancient proverb &mdash; restated by every office.</p>
           <a class="button intro intro-four" href="#oracle">Consult Telly</a>
         </div>
-
-        <aside class="hero-note intro intro-four" aria-label="Origin of the title">
-          <span>Title</span>
-          <p>Given by colleagues.<br>Confirmed by domain.</p>
-        </aside>
       </div>
     </section>
 

@@ -1,4 +1,4 @@
 ---
 title: "Telly. The Guru."
-description: "Bring the hard question. Leave with a sharper one."
+description: "The journey of a thousand miles begins with a single step. It ends with a meeting to plan it."
 ---
