@@ -61,7 +61,7 @@ DNS can take up to 24 hours to settle. Once GitHub shows the domain check as suc
 
 - `content/_index.md`: homepage metadata
 - `layouts/index.html`: homepage markup
-- `assets/css/main.css`: responsive design and dark mode
+- `assets/css/main.css`: responsive light theme, layout, and quote typography
 - `assets/js/main.js`: the local "guru" answer interaction
 - `assets/images/`: original project artwork
 - `.github/workflows/hugo.yaml`: automatic GitHub Pages deployment
