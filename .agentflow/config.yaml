@@ -1,0 +1,53 @@
+version: 1
+backend: omp
+baseBranch: main
+capabilities:
+  investigation: opencode-go/muse-spark-1.3-contributor
+  planning: opencode-go/muse-spark-1.3-contributor
+  test-planning: opencode-go/muse-spark-1.3-contributor
+  implementation: opencode-go/muse-spark-1.3-contributor
+  review: opencode-go/muse-spark-1.3-contributor
+  security-review: opencode-go/muse-spark-1.3-contributor
+  data-review: opencode-go/muse-spark-1.3-contributor
+  api-review: opencode-go/muse-spark-1.3-contributor
+  ui-review: opencode-go/muse-spark-1.3-contributor
+  performance-review: opencode-go/muse-spark-1.3-contributor
+roles:
+  investigator: investigation
+  planner: planning
+  test-planner: test-planning
+  implementer: implementation
+  reviewer: review
+  security-reviewer: security-review
+  data-reviewer: data-review
+  api-reviewer: api-review
+  ui-reviewer: ui-review
+  performance-reviewer: performance-review
+  repairer: implementation
+promptExtensions: {}
+skills:
+  searchPaths:
+    - .agentflow/skills
+    - .agents/skills
+    - ~/.agents/skills
+  roles: {}
+verification:
+  tier1:
+    - name: build
+      command: hugo build --gc --minify
+      timeoutMinutes: 10
+  tier2: []
+  tier3: []
+github:
+  remote: origin
+  labels:
+    - agent-generated
+    - needs-review
+safety:
+  protectedPaths:
+    - .agentflow/
+    - .github/workflows/
+    - migrations/
+    - infra/
+    - terraform/
+  flagDependencyChanges: true
