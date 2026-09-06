@@ -24,7 +24,10 @@ roles:
   ui-reviewer: ui-review
   performance-reviewer: performance-review
   repairer: implementation
-promptExtensions: {}
+promptExtensions:
+  investigator: |
+    OUTPUT FORMAT: the risks and blockingFindings fields must be arrays of plain strings
+    (one string per item). Never nest object values inside those arrays.
 skills:
   searchPaths:
     - .agentflow/skills
