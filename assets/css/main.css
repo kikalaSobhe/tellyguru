@@ -105,6 +105,7 @@ textarea {
 .site-footer,
 .hero,
 .doctrine,
+.wisdom,
 .claim,
 .oracle-section {
   width: min(100%, var(--max));
@@ -394,6 +395,26 @@ textarea:focus-visible {
 .doctrine {
   padding: clamp(7rem, 12vw, 13rem) var(--gutter) clamp(8rem, 14vw, 15rem);
   background: var(--bg);
+}
+
+.wisdom {
+  padding: clamp(7rem, 12vw, 13rem) var(--gutter) clamp(8rem, 14vw, 15rem);
+  background: var(--bg);
+}
+
+.wisdom blockquote {
+  max-width: 30ch;
+  margin: 0;
+  color: var(--quote);
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.wisdom blockquote + blockquote {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .section-heading {
@@ -863,6 +884,7 @@ textarea[aria-invalid="true"] {
   }
 
   .doctrine,
+  .wisdom,
   .oracle-section {
     padding-top: 7rem;
     padding-bottom: 8rem;
