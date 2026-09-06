@@ -24,29 +24,59 @@ roles:
   ui-reviewer: ui-review
   performance-reviewer: performance-review
   repairer: implementation
-promptExtensions: {}
-skills:
-  searchPaths:
-    - .agentflow/skills
-    - .agents/skills
-    - ~/.agents/skills
-  roles: {}
+promptExtensions:
+  planner: |
+    POLICY-SUPPLIED ACCEPTANCE CRITERIA (preserve them verbatim, same ids):
+    - AC-1: A new wisdom section exists in layouts/index.html, positioned after #doctrine and before #oracle.
+    - AC-2: The wisdom section contains exactly six <blockquote> quotes with pairwise distinct texts.
+    - AC-3: The wisdom section follows the eyebrow heading pattern (header.section-heading with <p> label before <h2>), is content/styling consistent with the site (reveal class, .wisdom rules in assets/css/main.css), and is titled "Sarcastic wisdom".
+    These criteria are verified by the frozen tier-1 command scripts/verify_index.py (JUnit report id index-wisdom, classname index.wisdom, one testcase per criterion).
+  test-planner: |
+    FROZEN EXECUTABLE REPORT (use exactly these identities, do not invent alternatives):
+    - Report id: index-wisdom (tier-1 command scripts/verify_index.py emits JUnit index-wisdom.xml into AGENTFLOW_REPORT_DIR).
+    - Classname: index.wisdom
+    Bind every criterion (AC-1, AC-2, AC-3) to the exact matching testcase names of that report:
+    - AC-1 -> "wisdom section sits between doctrine and oracle sections"
+    - AC-2 -> "wisdom section contains exactly six quotes" AND "wisdom section quotes are pairwise distinct"
+    - AC-3 -> "wisdom section follows eyebrow heading pattern", "wisdom section is styled in main.css", "sarcastic wisdom title present"
+    This is a feature contract (kind: feature); no regression bindings are required.
 verification:
   tier1:
     - name: build
       command: hugo build --gc --minify
       timeoutMinutes: 10
+    - name: index-wisdom
+      command: python3 scripts/verify_index.py
+      timeoutMinutes: 5
+      reports:
+        - id: index-wisdom
+          format: junit
+          path: index-wisdom.xml
   tier2: []
   tier3: []
+quality:
+  requiredTiers: [1]
+  requireCi: true
+  acceptanceCriteria:
+    - id: AC-1
+      description: A new wisdom section exists in layouts/index.html, positioned after #doctrine and before #oracle.
+    - id: AC-2
+      description: The wisdom section contains exactly six <blockquote> quotes with pairwise distinct texts.
+    - id: AC-3
+      description: The wisdom section follows the eyebrow heading pattern (header.section-heading, <p> label over <h2>), is styled via .wisdom rules in assets/css/main.css with the reveal animation, and is titled "Sarcastic wisdom".
 github:
   remote: origin
   labels:
     - agent-generated
     - needs-review
+  requiredChecks:
+    - build
+    - deploy
 safety:
   protectedPaths:
     - .agentflow/
     - .github/workflows/
+    - scripts/
     - migrations/
     - infra/
     - terraform/
