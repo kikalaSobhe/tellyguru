@@ -24,6 +24,7 @@ roles:
   ui-reviewer: ui-review
   performance-reviewer: performance-review
   repairer: implementation
+<<<<<<< HEAD
 promptExtensions:
   planner: |
     POLICY-SUPPLIED ACCEPTANCE CRITERIA (preserve them verbatim, same ids):
@@ -52,6 +53,29 @@ verification:
         - id: index-wisdom
           format: junit
           path: index-wisdom.xml
+=======
+promptExtensions: {}
+skills:
+  searchPaths:
+    - .agentflow/skills
+    - .agents/skills
+    - ~/.agents/skills
+  roles: {}
+workflow:
+  testPlan: skip
+quality:
+  acceptanceMode: review
+  requiredTiers: [1]
+  requireRegression: false
+  requireCi: false # For projects without required CI checks
+  toolVersions:
+    - name: Hugo
+      command: hugo version
+verification:
+  tier1:
+    - name: Hugo build
+      command: hugo --minify
+>>>>>>> 340bab7 (skip testplan)
   tier2: []
   tier3: []
 quality:
